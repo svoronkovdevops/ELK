@@ -1,0 +1,17 @@
+version: '3'
+
+volumes:
+  elasticsearch:
+    driver: local
+
+services:
+
+  logstash:
+    container_name: logstash_one_channel
+    image: docker.elastic.co/logstash/logstash:7.7.0
+
+    ports:
+      - 5000:5000
+    volumes:
+      - ./config/pipeline.yml:/usr/share/logstash/config/pipeline.yml:ro
+      - ./config/pipelines:/usr/share/logstash/config/pipelines:ro
